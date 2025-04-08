@@ -37,9 +37,6 @@ def obtenir_clic(grille):
             if grille[i][j][0][0] < fltk.abscisse_souris() <= grille[i][j][0][1] and grille[i][j][1][0] < fltk.ordonnee_souris() <= grille[i][j][1][1]:
                 return i, j
 
-# le nom d'une figure : haut, droite, bas, gauche
-
-
 def clic_valide(grille, y, x):
     return 0 <= y < len(grille) and 0 <= x < len(grille[0])
 
@@ -67,7 +64,6 @@ def get_compatible_elements(grille, y, x, tuiles):
             compatible.append(e)
 
     return compatible
-
 
 def ile_automatique(grilleClics, grilleTerm):
     maxY, maxX = len(grilleTerm), len(grilleTerm[0])
@@ -107,7 +103,8 @@ def afficher_menu_possibilites(grillePoss, grillePossClics):
             if grillePoss[y][x] is None:
                 return objets
             objets.append(fltk.image((grillePossClics[y][x][0][0]+grillePossClics[y][x][0][1])/2, (grillePossClics[y][x][1][0]+grillePossClics[y][x][1][1])/2, PATH + "/" + grillePoss[y][x] + ".png", largeur=40, hauteur=40, ancrage='center', tag=f'im{y}{x}'))
-    
+            objets.append(fltk.rectangle(grillePossClics[y][x][0][0]+10, grillePossClics[y][x][1][0]+10, grillePossClics[y][x][0][1]-10, grillePossClics[y][x][1][1]-10, 'grey'))
+
 def menu_possibilites(grilleClics, possibilites):
     affichage = [fltk.rectangle(grilleClics[2][2][0][0], grilleClics[2][2][1][0], grilleClics[-3][-3][0][1], grilleClics[-3][-3][1][1], 'grey', 'white', 1, "menuPossib")]
     
@@ -128,7 +125,6 @@ def menu_possibilites(grilleClics, possibilites):
             effacer_multiple_objets(affichage)
             
             return stat_clic, grillePoss[x][y]
-        
 
 if __name__ == '__main__':
     grilleClics, grilleTerm = cree_interface(MAX_L, MAX_H)
@@ -164,7 +160,6 @@ if __name__ == '__main__':
                 fltk.texte(250, 250, 'Aucune possibilité', couleur = 'red', remplissage = 'white', ancrage = 'center', police = 'Helvetica', taille = 30, tag = 'texteVide')
                 
     fltk.attend_fermeture()
-    
     
     
     
